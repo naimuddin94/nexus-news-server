@@ -5,11 +5,11 @@ const articleSchema = mongoose.Schema({
   image: String,
   publisher: {
     name: String,
+    email: String,
     logo: String,
   },
   tags: [String],
   description: String,
-  content: String,
   views: Number,
   isPremium: Boolean,
   approved: Boolean,

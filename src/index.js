@@ -5,8 +5,8 @@ const globalErrorHandler = require("./utils/globalErrorHandler");
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 const app = express();
-const userHandler = require("./routes/userRoutes");
-const articleHandler = require("./routes/articleRoutes");
+const userRoutes = require("./routes/userRoutes");
+const articleRoutes = require("./routes/articleRoutes");
 
 app.use(express.json());
 app.use(cors());
@@ -16,8 +16,8 @@ mongoose
   .then(() => console.log("DB connection established"))
   .catch((error) => console.log(error));
 
-app.use("/users", userHandler);
-app.use("/articles", articleHandler);
+app.use("/users", userRoutes);
+app.use("/articles", articleRoutes);
 
 app.get("/", (req, res) => {
   res.send("nexus news is running....");
