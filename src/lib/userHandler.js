@@ -33,4 +33,20 @@ const findUserByEmail = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, createUser, findUserByEmail };
+// update user role
+const updateUserRole = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const { newRole } = req.body;
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { role: newRole },
+      { new: true }
+    );
+    res.json({ message: "Role updated successfully" });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
+module.exports = { getAllUsers, createUser, findUserByEmail, updateUserRole };

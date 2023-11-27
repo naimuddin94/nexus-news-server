@@ -12,12 +12,30 @@ const getArticles = async (req, res) => {
   }
 };
 
-// get all articles
+// get articles by email address
 const getArticlesByPublisherEmail = async (req, res) => {
   try {
     const query = { "publisher.email": req.query.email };
     const result = await Article.find(query);
     res.send(result);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
+// get articles by user query parameters
+const getArticlesByUserSearch = async (req, res) => {
+  try {
+    const { search } = req.query;
+    let query = {};
+    if (search) {
+      query.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { tags: { $regex: new RegExp(search, "i") } },
+      ];
+    }
+    const articles = await Article.find(query);
+    res.send(articles);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -56,10 +74,24 @@ const createArticle = async (req, res) => {
   }
 };
 
+// approves Article by admin
+const approvedByAdmin = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { approved } = req.body;
+    await Article.findByIdAndUpdate(id, { approved }, { new: true });
+    res.json({ message: "Approved successfully" });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
 module.exports = {
   createArticle,
   getArticles,
   getTrendingArticle,
   getArticleById,
   getArticlesByPublisherEmail,
+  approvedByAdmin,
+  getArticlesByUserSearch,
 };

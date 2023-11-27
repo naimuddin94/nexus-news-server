@@ -5,6 +5,8 @@ const {
   getArticleById,
   getArticlesByPublisherEmail,
   getTrendingArticle,
+  approvedByAdmin,
+  getArticlesByUserSearch,
 } = require("../lib/articleHandler");
 const router = express.Router();
 
@@ -14,6 +16,9 @@ router.get("/", getArticles);
 // get article by publisher email
 router.get("/owner", getArticlesByPublisherEmail);
 
+// get article by user search value
+router.get("/query", getArticlesByUserSearch);
+
 // get most views 6 article
 router.get("/views", getTrendingArticle);
 
@@ -22,5 +27,8 @@ router.get("/:id", getArticleById);
 
 // create a new article
 router.post("/", createArticle);
+
+// approved article by admin
+router.put("/:id", approvedByAdmin);
 
 module.exports = router;
