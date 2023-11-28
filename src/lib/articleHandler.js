@@ -12,6 +12,17 @@ const getArticles = async (req, res) => {
   }
 };
 
+// get all articles
+const getApprovedArticles = async (req, res) => {
+  try {
+    const query = { approved: true };
+    const result = await Article.find(query);
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
 // get articles by email address
 const getArticlesByPublisherEmail = async (req, res) => {
   try {
@@ -94,4 +105,5 @@ module.exports = {
   getArticlesByPublisherEmail,
   approvedByAdmin,
   getArticlesByUserSearch,
+  getApprovedArticles,
 };

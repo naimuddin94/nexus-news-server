@@ -7,9 +7,15 @@ const port = process.env.PORT || 5000;
 const app = express();
 const userRoutes = require("./routes/userRoutes");
 const articleRoutes = require("./routes/articleRoutes");
+const authenticationRoute = require("./routes/authenticationRoute");
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    credentials: true,
+  })
+);
 
 mongoose
   .connect(process.env.DB_URI, { dbName: process.env.DB_NAME })
@@ -18,6 +24,7 @@ mongoose
 
 app.use("/users", userRoutes);
 app.use("/articles", articleRoutes);
+app.use("/auth", authenticationRoute);
 
 app.get("/", (req, res) => {
   res.send("nexus news is running....");

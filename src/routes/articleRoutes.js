@@ -7,11 +7,15 @@ const {
   getTrendingArticle,
   approvedByAdmin,
   getArticlesByUserSearch,
+  getApprovedArticles,
 } = require("../lib/articleHandler");
 const router = express.Router();
 
 // get all articles
 router.get("/", getArticles);
+
+// get all articles
+router.get("/approved", getApprovedArticles);
 
 // get article by publisher email
 router.get("/owner", getArticlesByPublisherEmail);

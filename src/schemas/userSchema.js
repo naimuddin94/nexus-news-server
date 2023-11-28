@@ -17,10 +17,9 @@ const userSchema = mongoose.Schema({
   role: {
     type: String,
     enum: ["admin", "publisher", "normal"],
-    required: true,
+    default: "normal",
   },
-  isPremium: { type: Boolean, required: true },
-  isPublisher: { type: Boolean, required: true },
+  isPremium: { type: Boolean, default: false },
   createAt: {
     type: Date,
     default: Date.now,
