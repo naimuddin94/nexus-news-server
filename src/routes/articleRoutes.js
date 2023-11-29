@@ -31,7 +31,7 @@ router.get("/query", getArticlesByUserSearch);
 router.get("/views", getTrendingArticle);
 
 // find article by id
-router.get("/:id", verifyToken, getArticleById);
+router.get("/:id", getArticleById);
 
 // create a new article
 router.post("/", verifyToken, createArticle);

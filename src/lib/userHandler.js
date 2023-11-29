@@ -74,7 +74,6 @@ const makePublisher = async (req, res) => {
 const makePremium = async (req, res) => {
   try {
     const { email, duration } = req.body;
-    console.log(email, duration);
     const user = await User.findOne({ email });
     user.isPremium = true;
     user.save();

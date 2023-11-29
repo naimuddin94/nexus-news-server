@@ -17,7 +17,7 @@ router.get("/", verifyToken, verifyAdmin, getAllUsers);
 router.post("/", createUser);
 
 // find user by email
-router.get("/:email", verifyToken, findUserByEmail);
+router.get("/:email", findUserByEmail);
 
 // user role update
 router.put("/:userId", verifyToken, verifyAdmin, updateUserRole);
