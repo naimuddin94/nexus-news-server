@@ -25,6 +25,7 @@ app.use(cookieParser());
 app.use("/users", userRoutes);
 app.use("/articles", articleRoutes);
 app.use("/auth", authenticationRoute);
+app.use("/payment", paymentRoute);
 
 app.get("/", (req, res) => {
   res.send("nexus news is running....");
