@@ -11,6 +11,7 @@ const {
   premiumByAdmin,
   deleteArticle,
 } = require("../lib/articleHandler");
+const verifyToken = require("../middlewares/verifyToken");
 const router = express.Router();
 
 // get all articles
@@ -20,7 +21,7 @@ router.get("/", getArticles);
 router.get("/approved", getApprovedArticles);
 
 // get article by publisher email
-router.get("/owner", getArticlesByPublisherEmail);
+router.get("/owner", verifyToken, getArticlesByPublisherEmail);
 
 // get article by user search value
 router.get("/query", getArticlesByUserSearch);
@@ -29,18 +30,18 @@ router.get("/query", getArticlesByUserSearch);
 router.get("/views", getTrendingArticle);
 
 // find article by id
-router.get("/:id", getArticleById);
+router.get("/:id",verifyToken, getArticleById);
 
 // create a new article
-router.post("/", createArticle);
+router.post("/", verifyToken, createArticle);
 
 // approved article by admin
-router.put("/:id", approvedByAdmin);
+router.put("/:id", verifyToken, approvedByAdmin);
 
 // make premium by admin
-router.put("/make-premium/:id", premiumByAdmin);
+router.put("/make-premium/:id", verifyToken, premiumByAdmin);
 
 // delete article by admin
-router.delete("/:id", deleteArticle);
+router.delete("/:id", verifyToken, deleteArticle);
 
 module.exports = router;
