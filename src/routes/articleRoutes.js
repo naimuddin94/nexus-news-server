@@ -8,6 +8,8 @@ const {
   approvedByAdmin,
   getArticlesByUserSearch,
   getApprovedArticles,
+  premiumByAdmin,
+  deleteArticle,
 } = require("../lib/articleHandler");
 const router = express.Router();
 
@@ -34,5 +36,11 @@ router.post("/", createArticle);
 
 // approved article by admin
 router.put("/:id", approvedByAdmin);
+
+// make premium by admin
+router.put("/make-premium/:id", premiumByAdmin);
+
+// delete article by admin
+router.delete("/:id", deleteArticle);
 
 module.exports = router;

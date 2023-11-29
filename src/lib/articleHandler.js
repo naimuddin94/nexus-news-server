@@ -97,6 +97,33 @@ const approvedByAdmin = async (req, res) => {
   }
 };
 
+const premiumByAdmin = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { isPremium } = req.body;
+    await Article.findByIdAndUpdate(id, { isPremium }, { new: true });
+    res.json({ message: "premium status change successfully" });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
+// delete article by admin
+const deleteArticle = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await Article.findByIdAndDelete(id);
+
+    if (!result) {
+      return res.status(404).json({ message: "Article not found" });
+    }
+
+    return res.status(200).json({ message: "Article deleted successfully" });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
 module.exports = {
   createArticle,
   getArticles,
@@ -106,4 +133,6 @@ module.exports = {
   approvedByAdmin,
   getArticlesByUserSearch,
   getApprovedArticles,
+  premiumByAdmin,
+  deleteArticle,
 };
