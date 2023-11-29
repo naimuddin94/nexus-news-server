@@ -70,11 +70,26 @@ const makePublisher = async (req, res) => {
   }
 };
 
+// make user premium
+const makePremium = async (req, res) => {
+  try {
+    const { email, duration } = req.body;
+    console.log(email, duration);
+    const user = await User.findOne({ email });
+    user.isPremium = true;
+    user.save();
+    res.status(200).send({ message: "Update successfully" });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
 module.exports = {
   getAllUsers,
   createUser,
   findUserByEmail,
   updateUserRole,
   makePublisher,
+  makePremium,
   User,
 };

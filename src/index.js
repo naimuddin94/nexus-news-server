@@ -7,7 +7,7 @@ const app = express();
 const userRoutes = require("./routes/userRoutes");
 const articleRoutes = require("./routes/articleRoutes");
 const authenticationRoute = require("./routes/authenticationRoute");
-
+const paymentRoute = require("./routes/paymentRoute");
 
 app.use(express.json());
 app.use(

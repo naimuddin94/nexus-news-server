@@ -5,6 +5,7 @@ const {
   getAllUsers,
   findUserByEmail,
   updateUserRole,
+  makePremium,
 } = require("../lib/userHandler");
 const verifyToken = require("../middlewares/verifyToken");
 const verifyAdmin = require("../middlewares/verifyAdmin");
@@ -20,5 +21,8 @@ router.get("/:email", verifyToken, findUserByEmail);
 
 // user role update
 router.put("/:userId", verifyToken, verifyAdmin, updateUserRole);
+
+// make user premium
+router.patch("/make-premium", makePremium);
 
 module.exports = router;
