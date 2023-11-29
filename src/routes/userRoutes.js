@@ -7,9 +7,10 @@ const {
   updateUserRole,
 } = require("../lib/userHandler");
 const verifyToken = require("../middlewares/verifyToken");
+const verifyAdmin = require("../middlewares/verifyAdmin");
 
 // get all users
-router.get("/", verifyToken, getAllUsers);
+router.get("/", verifyToken, verifyAdmin, getAllUsers);
 
 // create a new user
 router.post("/", createUser);
@@ -18,6 +19,6 @@ router.post("/", createUser);
 router.get("/:email", verifyToken, findUserByEmail);
 
 // user role update
-router.put("/:userId", verifyToken, updateUserRole);
+router.put("/:userId", verifyToken, verifyAdmin, updateUserRole);
 
 module.exports = router;

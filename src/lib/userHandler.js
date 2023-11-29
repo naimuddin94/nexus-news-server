@@ -76,4 +76,5 @@ module.exports = {
   findUserByEmail,
   updateUserRole,
   makePublisher,
+  User,
 };
