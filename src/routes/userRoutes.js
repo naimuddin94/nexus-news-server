@@ -6,17 +6,18 @@ const {
   findUserByEmail,
   updateUserRole,
 } = require("../lib/userHandler");
+const verifyToken = require("../middlewares/verifyToken");
 
 // get all users
-router.get("/", getAllUsers);
+router.get("/", verifyToken, getAllUsers);
 
 // create a new user
 router.post("/", createUser);
 
 // find user by email
-router.get("/:email", findUserByEmail);
+router.get("/:email", verifyToken, findUserByEmail);
 
 // user role update
-router.put("/:userId", updateUserRole);
+router.put("/:userId", verifyToken, updateUserRole);
 
 module.exports = router;

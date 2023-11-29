@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const globalErrorHandler = require("./utils/globalErrorHandler");
 require("dotenv").config();
 const app = express();
@@ -19,6 +20,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(cookieParser());
 
 app.use("/users", userRoutes);
 app.use("/articles", articleRoutes);

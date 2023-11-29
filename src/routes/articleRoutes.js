@@ -42,6 +42,6 @@ router.put("/:id", verifyToken, approvedByAdmin);
 router.put("/make-premium/:id", verifyToken, premiumByAdmin);
 
 // delete article by admin
-router.delete("/:id", verifyToken, deleteArticle);
+router.delete("/:id",verifyToken, deleteArticle);
 
 module.exports = router;
