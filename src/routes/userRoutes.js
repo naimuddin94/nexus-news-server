@@ -6,12 +6,16 @@ const {
   findUserByEmail,
   updateUserRole,
   makePremium,
+  getCountUsers,
 } = require("../lib/userHandler");
 const verifyToken = require("../middlewares/verifyToken");
 const verifyAdmin = require("../middlewares/verifyAdmin");
 
 // get all users
 router.get("/", verifyToken, verifyAdmin, getAllUsers);
+
+// get all users length
+router.get("/user-length", getCountUsers)
 
 // create a new user
 router.post("/", createUser);

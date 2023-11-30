@@ -83,6 +83,18 @@ const makePremium = async (req, res) => {
   }
 };
 
+// get total user length
+const getCountUsers = async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments();
+    const normalUsers = await User.countDocuments({ isPremium: false });
+    const premiumUsers = await User.countDocuments({ isPremium: true });
+    res.send({ totalUsers, normalUsers, premiumUsers });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
 module.exports = {
   getAllUsers,
   createUser,
@@ -90,5 +102,6 @@ module.exports = {
   updateUserRole,
   makePublisher,
   makePremium,
+  getCountUsers,
   User,
 };
