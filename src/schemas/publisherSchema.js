@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const publisherSchema = mongoose.Schema({
-  publisher: String,
+  publisher: { type: String, required: true, unique: true },
   logo: String,
   createAt: {
     type: Date,

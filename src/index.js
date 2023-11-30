@@ -8,6 +8,7 @@ const userRoutes = require("./routes/userRoutes");
 const articleRoutes = require("./routes/articleRoutes");
 const authenticationRoute = require("./routes/authenticationRoute");
 const paymentRoute = require("./routes/paymentRoute");
+const adminRoute = require("./routes/adminRoute");
 
 app.use(express.json());
 app.use(
@@ -26,6 +27,7 @@ app.use("/users", userRoutes);
 app.use("/articles", articleRoutes);
 app.use("/auth", authenticationRoute);
 app.use("/payment", paymentRoute);
+app.use("/admin" , adminRoute);
 
 app.get("/", (req, res) => {
   res.send("nexus news is running....");
