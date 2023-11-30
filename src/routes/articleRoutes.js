@@ -10,6 +10,7 @@ const {
   getApprovedArticles,
   premiumByAdmin,
   deleteArticle,
+  updateArticle,
 } = require("../lib/articleHandler");
 const verifyToken = require("../middlewares/verifyToken");
 const verifyAdmin = require("../middlewares/verifyAdmin");
@@ -42,7 +43,10 @@ router.put("/:id", verifyToken, verifyAdmin, approvedByAdmin);
 // make premium by admin
 router.put("/make-premium/:id", verifyToken, premiumByAdmin);
 
-// delete article by admin
+// article update
+router.patch("/update/:id", updateArticle);
+
+// delete article
 router.delete("/:id", verifyToken, deleteArticle);
 
 module.exports = router;

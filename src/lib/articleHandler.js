@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const articleSchema = require("../schemas/articleSchema");
 const Article = mongoose.model("Article", articleSchema);
 
-// get all articles
+// get all articles for admin
 const getArticles = async (req, res) => {
   try {
     const result = await Article.find();
@@ -55,7 +55,8 @@ const getArticlesByUserSearch = async (req, res) => {
 // get most views articles
 const getTrendingArticle = async (req, res) => {
   try {
-    const result = await Article.find().sort({ views: -1 }).limit(6);
+    const query = { approved: true };
+    const result = await Article.find(query).sort({ views: -1 }).limit(6);
     res.send(result);
   } catch (error) {
     res.status(500).send({ message: error.message });
@@ -97,6 +98,7 @@ const approvedByAdmin = async (req, res) => {
   }
 };
 
+// make premium
 const premiumByAdmin = async (req, res) => {
   try {
     const id = req.params.id;
@@ -124,6 +126,22 @@ const deleteArticle = async (req, res) => {
   }
 };
 
+// update article
+const updateArticle = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { title, image, category, publisher, tags, description } = req.body;
+    await Article.findByIdAndUpdate(
+      id,
+      { title, image, category, publisher, tags, description },
+      { new: true }
+    );
+    res.json({ message: "Update successfully" });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
 module.exports = {
   createArticle,
   getArticles,
@@ -135,4 +153,5 @@ module.exports = {
   getApprovedArticles,
   premiumByAdmin,
   deleteArticle,
+  updateArticle,
 };
