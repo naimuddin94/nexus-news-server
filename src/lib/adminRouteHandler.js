@@ -23,4 +23,15 @@ const createPublisher = async (req, res) => {
   }
 };
 
-module.exports = { createPublisher, getAllPublisher };
+// delete publisher
+const deletePublisher = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Publisher.findByIdAndDelete(id);
+    res.status(200).send({ message: "Deleted successfully" });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
+module.exports = { createPublisher, getAllPublisher, deletePublisher };
