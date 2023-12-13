@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const articleSchema = require("../schemas/articleSchema");
 const Article = mongoose.model("Article", articleSchema);
-
+ 
 // get all articles for admin
 const getArticles = async (req, res) => {
   try {
@@ -141,6 +141,7 @@ const updateArticle = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
 
 module.exports = {
   createArticle,

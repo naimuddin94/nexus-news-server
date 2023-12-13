@@ -76,6 +76,9 @@ const makePremium = async (req, res) => {
     const { email, duration } = req.body;
     const user = await User.findOne({ email });
     user.isPremium = true;
+    const currentTime = new Date();
+    const expirationTime = new Date(currentTime.getTime() + duration * 60000);
+    user.premiumExpiration = expirationTime;
     user.save();
     res.status(200).send({ message: "Update successfully" });
   } catch (error) {
@@ -94,6 +97,8 @@ const getCountUsers = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
+
 
 module.exports = {
   getAllUsers,

@@ -15,7 +15,7 @@ const verifyAdmin = require("../middlewares/verifyAdmin");
 router.get("/", verifyToken, verifyAdmin, getAllUsers);
 
 // get all users length
-router.get("/user-length", getCountUsers)
+router.get("/user-length", getCountUsers);
 
 // create a new user
 router.post("/", createUser);

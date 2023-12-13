@@ -49,4 +49,5 @@ router.patch("/update/:id", updateArticle);
 // delete article
 router.delete("/:id", verifyToken, deleteArticle);
 
+
 module.exports = router;
