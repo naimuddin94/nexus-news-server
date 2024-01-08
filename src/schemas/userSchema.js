@@ -24,7 +24,10 @@ const userSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  premiumExpiration: Number,
+  premiumExpiration: {
+    type: Number,
+    default: new Date().getTime(),
+  },
 });
 
 module.exports = userSchema;
